@@ -5,13 +5,11 @@ class emailFor404 extends base {
    *
    * Attach observer class to the global $zco_notifier and watch for a single notifier event.
    */
-  function emailFor404() {
-    global $zco_notifier;
+  function __construct () {
     if (SEND_404_ERRORS_EMAIL_TO_STATUS == '1' and SEND_404_ERRORS_EMAILS_TO != '' and SEND_404_ERRORS_EMAILS_TO != 'id@yoursite.com') {
-      $zco_notifier->attach($this, array('NOTIFY_HEADER_END_PAGE_NOT_FOUND'));
+      $this->attach($this, array('NOTIFY_HEADER_END_PAGE_NOT_FOUND'));
     }
   }
-
 
  /**   Actual Method that does the desired activity
    *
@@ -31,4 +29,3 @@ class emailFor404 extends base {
     // EOF Send email to admin for 404 errors
   }
 }
-?>

@@ -1,7 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Generate an Email on 404 Errors</title>
 
 <style type="text/css">
@@ -50,35 +51,30 @@ pre {
 <body>
 <a name="top" id="top"></a>
 <h1>Generate an Email on 404 Errors</h1>
-<h3>Version 1.2.2 by lat9 (with DrByte's modification to use the notifier class!)</h3>
+<h3>Version 1.2.3 by lat9 (with DrByte's modification to use the notifier class!)</h3>
 <p>Current Support Thread at Zen Cart Forums: <a href="http://www.zen-cart.com/forum/showthread.php?t=152378" target="_blank">http://www.zen-cart.com/forum/showthread.php?t=152378</a></p>
 <h2>Version History:</h2>
 <ul>
   <li>v1.0, 2010-04-09, Initial release.</li>
-  <li>v1.1, 2010-04-13
-    <ul>
+  <li>v1.1, 2010-04-13:<ul>
       <li>Observer class was not being instantiated, use $zco_notifier</li>
-    </ul>
-  </li>
-  <li>v1.2, 2012-05-13
-    <ul>
+  </ul></li>
+  <li>v1.2, 2012-05-13:<ul>
       <li>Converted readme to HTML.</li>
       <li>Added switch to enable/disable recording emails in email_archive table of database.</li>
       <li>Corrected message to include page from which the 404 originated.</li>
-    </ul>
-  </li>
-  <li>v1.2.1, 2012-05-14
-    <ul>
+  </ul></li>
+  <li>v1.2.1, 2012-05-14:<ul>
       <li>"Typo" in name of variable that enables/disables archiving in class module.</li>
       <li>Updated class module to include html_msg information, to prevent "empty" message under some circumstances.</li>
       <li>Updated readme to indicate that this function only operates if the admin's Configure->My Store->Missing Page Check is set to "Page Not Found".</li>
-    </ul>
-  </li>
-  <li>v1.2.2, 2012-05-18
-    <ul>
+  </ul></li>
+  <li>v1.2.2, 2012-05-18:<ul>
       <li>Use $_SERVER variables instead of $_ENV variables; they're more widely used and contain the same information.</li>
-    </ul>
-  </li>
+  </ul></li>
+  <li>v1.2.3, 2015-12-24:<ul>
+    <li>Updated for PHP 7.0 compliance (class constructors named __construct).</li>
+  </ul></li>
 </ul>
 <h2>What it does</h2>
 <p>I got tired of searching my Apache logs for 404 errors, so made this tiny update to send myself an e-mail message when a 404 occurs.  This plugin has been tested on v1.3.8a, v1.3.9x and 1.5.0.  The e-mail message is of the format:</p>
