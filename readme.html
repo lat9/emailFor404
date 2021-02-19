@@ -1,91 +1,45 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Generate an Email on 404 Errors</title>
-
 <style type="text/css">
 <!--
-a, a:active, a:visited {
-  color: #006666;
-  text-decoration: none
-}
-a:hover {
-    color:#00CC99;
-    text-decoration: underline;
-}
-BODY, P, H1, H2, H3, H4, H5, H6, LI, TD, DD, DT {
-  font-family: Verdana, AvantGarde, Tahoma, Arial, sans-serif;
-  font-size: 10pt;
-  color: black;
-  padding: 0px;
-  margin: 20px;
-}
-H1, H2, H3, H4 {
-  font-weight: bold
-}
-h1 {
-  font-size: 20px;
-}
-h2 {
-  font-size: 16px;
-}
-code {
-  padding-left: 25px;
-}
-ol li {
-  margin-left: 0;
-}
-ul {
-  padding: 0 auto;
-}
-pre {
-  padding-left: 40px;
-}
+a, a:active, a:visited { color: #006666; text-decoration: none; }
+a:hover { color:#00CC99; text-decoration: underline; }
+BODY, P, H1, H2, H3, H4, H5, H6, LI, TD, DD, DT { font-family: Verdana, AvantGarde, Tahoma, Arial, sans-serif; font-size: 10pt; color: black; padding: 0px; margin: 20px; }
+H1, H2, H3, H4 { font-weight: bold; }
+h1 { font-size: 20px; }
+h2 { font-size: 16px; }
+pre { margin-left: 25px; }
+ol li { margin-left: 0; }
+ul { padding: 0 auto; }
 .corefile { color: red; }
 -->
 </style>
 </head>
-
 <body>
-<a name="top" id="top"></a>
 <h1>Generate an Email on 404 Errors</h1>
-<h3>Version 1.2.3 by lat9 (with DrByte's modification to use the notifier class!)</h3>
-<p>Current Support Thread at Zen Cart Forums: <a href="http://www.zen-cart.com/forum/showthread.php?t=152378" target="_blank">http://www.zen-cart.com/forum/showthread.php?t=152378</a></p>
-<h2>Version History:</h2>
-<ul>
-  <li>v1.0, 2010-04-09, Initial release.</li>
-  <li>v1.1, 2010-04-13:<ul>
-      <li>Observer class was not being instantiated, use $zco_notifier</li>
-  </ul></li>
-  <li>v1.2, 2012-05-13:<ul>
-      <li>Converted readme to HTML.</li>
-      <li>Added switch to enable/disable recording emails in email_archive table of database.</li>
-      <li>Corrected message to include page from which the 404 originated.</li>
-  </ul></li>
-  <li>v1.2.1, 2012-05-14:<ul>
-      <li>"Typo" in name of variable that enables/disables archiving in class module.</li>
-      <li>Updated class module to include html_msg information, to prevent "empty" message under some circumstances.</li>
-      <li>Updated readme to indicate that this function only operates if the admin's Configure->My Store->Missing Page Check is set to "Page Not Found".</li>
-  </ul></li>
-  <li>v1.2.2, 2012-05-18:<ul>
-      <li>Use $_SERVER variables instead of $_ENV variables; they're more widely used and contain the same information.</li>
-  </ul></li>
-  <li>v1.2.3, 2015-12-24:<ul>
-    <li>Updated for PHP 7.0 compliance (class constructors named __construct).</li>
-  </ul></li>
-</ul>
+<h3>Version 1.2.5 by lat9 (with DrByte's modification to use the notifier class!)</h3>
+<p>Current Support Thread at Zen Cart Forums: <a href="https://www.zen-cart.com/forum/showthread.php?t=152378" target="_blank">https://www.zen-cart.com/forum/showthread.php?t=152378</a></p>
 <h2>What it does</h2>
-<p>I got tired of searching my Apache logs for 404 errors, so made this tiny update to send myself an e-mail message when a 404 occurs.  This plugin has been tested on v1.3.8a, v1.3.9x and 1.5.0.  The e-mail message is of the format:</p>
-<pre>A user at host address [xxxx] with IP address [yyyy] generated a 404 using the query string [zzzz].</pre>
+<p>I got tired of searching my Apache logs for 404 errors, so made this tiny update to send myself an e-mail message when a 404 occurs.  This plugin has been tested on Zen Cart versions v1.3.8a through v1.5.6c.  The e-mail message is of the format:</p>
+<pre>At the time of the error:
+
+$_SERVER contents:
+[array of values]
+
+$_SESSION contents:
+[array of values]</pre>
 <p><strong>Note:</strong> The query string might be empty if the 404 was generated "outside" of your index.php, e.g.someone typed www.example.com/somedumbpage.  You can add the following line to your store's /.htaccess file to cause this plugin to handle that case as well:</p>
 <pre>ErrorDocument 404 /index.php?main_page=page_not_found</pre>
+
 <h2>How to use it</h2>
 <p>There are no core-file overwrites in this plugin; you should <strong>always</strong> backup your cart&rsquo;s database and files prior to making any changes.</p>
 <ol>
 <li>Make sure that your admin's Configuration->My Store->Missing Page Check is set to <em>Page Not Found</em>; any other setting essentially disables this plugin.</li>
-<li>Edit the define() statements in /includes/auto_loaders/config.emailFor404.php to customize the plugin for your website:
+<li>Edit the define() statements in /includes/languages/english/extra_definitions/emailFor404_extra_definitions.php to customize the plugin for your website:
 <ul>
   <li>define('SEND_404_ERRORS_EMAILS_TO', '<em>id@yoursite.com</em>');
     <ul>
@@ -103,11 +57,11 @@ pre {
     </ul>
   </li>
 </ul></li>
-<li>Copy the catalog files to your cart:
+<li>Copy the plugin's files to your store's file-system:
 <ol>
   <li>/includes/auto_loaders/config.emailFor404.php
     <ul>
-      <li>Adds variables to enable the feature, define the send-to e-mail address and format strings for the e-mail message</li>
+      <li>Loads the observer-class element.</li>
     </ul>
   </li>
   <li>/includes/classes/observers/class.emailFor404.php
@@ -115,6 +69,40 @@ pre {
       <li>Monitors for 404 page, and sends the e-mail message, if enabled</li>
     </ul>
   </li>
+  <li>/includes/languages/english/extra_definitions/emailFor404_extra_definitions.php
+    <ul>
+      <li>Adds variables to enable the feature, define the send-to e-mail address and format strings for the e-mail message</li>
+    </ul>
+  </li>
 </ol></li></ol>
+<h2>Version History:</h2>
+<ul>
+  <li>v1.2.5, 2021-02-19:<ul>
+    <li>Zen Cart 1.5.8 interoperability, split language text to a language file.</li>
+  </ul></li>
+  <li>v1.2.4, 2019-08-25:<ul>
+    <li>Modify the email contents to include the <b>full</b> contents of both the <code>$_SERVER</code> and <code>$_SESSION</code> values at the time of the message.</li>
+  </ul></li>
+  <li>v1.2.3, 2015-12-24:<ul>
+    <li>Updated for PHP 7.0 compliance (class constructors named __construct).</li>
+  </ul></li>
+  <li>v1.2.2, 2012-05-18:<ul>
+      <li>Use $_SERVER variables instead of $_ENV variables; they're more widely used and contain the same information.</li>
+  </ul></li>
+  <li>v1.2.1, 2012-05-14:<ul>
+      <li>"Typo" in name of variable that enables/disables archiving in class module.</li>
+      <li>Updated class module to include html_msg information, to prevent "empty" message under some circumstances.</li>
+      <li>Updated readme to indicate that this function only operates if the admin's Configure->My Store->Missing Page Check is set to "Page Not Found".</li>
+  </ul></li>
+  <li>v1.2, 2012-05-13:<ul>
+      <li>Converted readme to HTML.</li>
+      <li>Added switch to enable/disable recording emails in email_archive table of database.</li>
+      <li>Corrected message to include page from which the 404 originated.</li>
+  </ul></li>
+  <li>v1.1, 2010-04-13:<ul>
+      <li>Observer class was not being instantiated, use $zco_notifier</li>
+  </ul></li>
+  <li>v1.0, 2010-04-09, Initial release.</li>
+</ul>
 </body>
 </html>
