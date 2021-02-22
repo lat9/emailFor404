@@ -7,8 +7,8 @@ class emailFor404 extends base
     //
     public function __construct()
     {
-        if (SEND_404_ERRORS_EMAIL_TO_STATUS == '1' && SEND_404_ERRORS_EMAILS_TO != '' && SEND_404_ERRORS_EMAILS_TO != 'id@yoursite.com') {
-            $this->attach($this, array('NOTIFY_HEADER_END_PAGE_NOT_FOUND'));
+        if (SEND_404_ERRORS_EMAIL_TO_STATUS === '1' && SEND_404_ERRORS_EMAILS_TO !== '' && SEND_404_ERRORS_EMAILS_TO !== 'id@yoursite.com') {
+            $this->attach($this, ['NOTIFY_HEADER_END_PAGE_NOT_FOUND']);
         }
     }
 
@@ -24,7 +24,7 @@ class emailFor404 extends base
         $email_text = sprintf(EMAIL_PAGE_NOT_FOUND_CONTENT, var_export($_SERVER, true), var_export($_SESSION, true));
         $html_msg['EMAIL_MESSAGE_HTML'] = nl2br($email_text);
 
-        $module = (SEND_404_ERRORS_EMAIL_ARCHIVE != '0') ? 'default' : 'no_archive';
+        $module = (SEND_404_ERRORS_EMAIL_ARCHIVE !== '0') ? 'default' : 'no_archive';
         zen_mail('', SEND_404_ERRORS_EMAILS_TO, $email_subject, $email_text, STORE_NAME, EMAIL_FROM, $html_msg, $module);
     }
 }
