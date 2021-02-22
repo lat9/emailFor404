@@ -16,7 +16,7 @@ class emailFor404 extends base
     // This is the method that sends the email, if a page-not-found is detected.
     //
 
-    public function update(&$class, $eventID, $p1) 
+    public function update(&$class, $eventID, $p1): void
     {
         $email_subject = EMAIL_PAGE_NOT_FOUND_SUBJECT;
         $html_msg['EMAIL_SUBJECT'] = $email_subject;
