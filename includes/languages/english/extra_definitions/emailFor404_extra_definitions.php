@@ -12,7 +12,7 @@ define('SEND_404_ERRORS_EMAIL_ARCHIVE', '0');               // Set to '0' for no
 // -----
 // Email subject.
 //
-define('EMAIL_PAGE_NOT_FOUND_SUBJECT', 'A 404 Error Was Generated');
+define('EMAIL_PAGE_NOT_FOUND_SUBJECT', '%s: 404 Error Page Not Found');
 
 // -----
 // Email content.  The following variables are supplied by the observer-class:

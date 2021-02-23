@@ -18,7 +18,7 @@ class emailFor404 extends base
 
     public function update(&$class, $eventID, $p1): void
     {
-        $email_subject = EMAIL_PAGE_NOT_FOUND_SUBJECT;
+        $email_subject = sprintf(EMAIL_PAGE_NOT_FOUND_SUBJECT, parse_url(HTTPS_SERVER, PHP_URL_HOST));
         $html_msg['EMAIL_SUBJECT'] = $email_subject;
 
         $email_text = sprintf(EMAIL_PAGE_NOT_FOUND_CONTENT, var_export($_SERVER, true), var_export($_SESSION, true));
