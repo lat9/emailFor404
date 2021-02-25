@@ -8,7 +8,7 @@ class emailFor404 extends base
     public function __construct()
     {
         if (SEND_404_ERRORS_EMAIL_TO_STATUS === '1' && SEND_404_ERRORS_EMAILS_TO !== '' && SEND_404_ERRORS_EMAILS_TO !== 'id@yoursite.com') {
-            $this->attach($this, ['NOTIFY_HEADER_END_PAGE_NOT_FOUND']);
+            $this->attach($this, array('NOTIFY_HEADER_END_PAGE_NOT_FOUND'));
         }
     }
 
@@ -16,7 +16,7 @@ class emailFor404 extends base
     // This is the method that sends the email, if a page-not-found is detected.
     //
 
-    public function update(&$class, $eventID, $p1): void
+    public function update(&$class, $eventID, $p1) 
     {
         $email_subject = sprintf(EMAIL_PAGE_NOT_FOUND_SUBJECT, parse_url(HTTPS_SERVER, PHP_URL_HOST));
         $html_msg['EMAIL_SUBJECT'] = $email_subject;
